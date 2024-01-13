@@ -1,5 +1,6 @@
-import { Box, Button, Grid, InputLabel, TextField, Typography } from "@mui/material"
+import { Box, Button, Divider, Grid, InputLabel, TextField, Typography } from "@mui/material"
 import { FormEvent } from "react"
+import { Link } from "react-router-dom"
 
 const RegistrationForm = () => {
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -94,6 +95,48 @@ const RegistrationForm = () => {
           </Button>
         </Grid>
       </form>
+      <div style={{ marginTop: "30px" }}>
+        <small>
+          <span>By creating an account, you agree to Amazon's</span>
+        </small>
+      </div>
+
+      <div>
+        <small>
+          <a href="#" style={{ textDecoration: "none" }}>
+            {" "}
+            Conditions of use
+          </a>{" "}
+          and{" "}
+          <a href="#" style={{ textDecoration: "none" }}>
+            Privacy policy
+          </a>
+        </small>
+      </div>
+
+      <Divider sx={{ marginTop: "36px", marginBottom: "36px" }} />
+
+      <div>
+        <small>
+          Already have an account?{" "}
+          <Link
+            to="/signin"
+            style={{ textDecoration: "none", color: "#0000ee" }}
+          >
+            Sign-in
+          </Link>
+        </small>
+      </div>
+
+      <div>
+        <small>
+          Buying for work?
+          <a href="#" style={{ textDecoration: "none" }}>
+            {" "}
+            Create a free business acount
+          </a>{" "}
+        </small>
+      </div>
     </Box>
   );
 }

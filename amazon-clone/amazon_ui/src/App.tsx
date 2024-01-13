@@ -1,21 +1,20 @@
-
-import {ThemeProvider} from "@mui/material"
-import { theme } from "./shared/utils/theme"
-import {BrowserRouter as Router, Routes,Route} from "react-router-dom"
-import { RegistrationForm } from "./features/auth/components"
+import { ThemeProvider } from "@mui/material";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { HomePage, Register } from "./pages";
+import { theme } from "./shared/utils/theme";
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme} >
+    <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path="/" element={<RegistrationForm/>} />
-          <Route path="/register" element={'Registerpage'} />
-          <Route path="/Signin" element={'Signinpage'} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/Signin" element={"Signinpage"} />
         </Routes>
       </Router>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

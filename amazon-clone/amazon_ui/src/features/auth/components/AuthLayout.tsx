@@ -11,7 +11,7 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
       justifyContent="flex-start"
       alignItems="center"
     >
-      <img src={images.amazon} alt="" />
+      <img src={images.amazon} alt="" width={300} height={150} />
       <main>{children}</main>
     </Grid>
   );
