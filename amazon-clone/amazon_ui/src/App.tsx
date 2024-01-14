@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@mui/material";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { HomePage, Register } from "./pages";
+import { HomePage, Register, SigninPage } from "./pages";
 import { theme } from "./shared/utils/theme";
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/Signin" element={"Signinpage"} />
+          <Route path="/Signin" element={<SigninPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
