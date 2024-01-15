@@ -1,0 +1,1 @@
+export const REACT_APP_BASE_API = "http://localhost:3000/api"
