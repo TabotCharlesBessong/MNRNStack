@@ -1,11 +1,79 @@
 import { Box, Button, Divider, Grid, InputLabel, TextField, Typography } from "@mui/material"
 import { FormEvent } from "react"
 import { Link } from "react-router-dom"
+import useInput from "../../../hooks/input/use-input";
+import { validateNameLength, validatePasswordLength } from "../../../shared/utils/validation/length";
+import { validateEmail } from "../../../shared/utils/validation/email";
+import { NewUser } from "../models/NewUser";
 
 const RegistrationForm = () => {
+  const {
+    text: name,
+    shouldDisplayError: nameHasError,
+    textChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+    clearHandler: nameClearHandler,
+  } = useInput(validateNameLength);
+
+  const {
+    text: email,
+    shouldDisplayError: emailHasError,
+    textChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    clearHandler: emailClearHandler,
+  } = useInput(validateEmail);
+
+  const {
+    text: password,
+    shouldDisplayError: passwordHasError,
+    textChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    clearHandler: passwordClearHandler,
+  } = useInput(validatePasswordLength);
+
+  const {
+    text: confirmPassword,
+    shouldDisplayError: confirmPasswordHasError,
+    textChangeHandler: confirmPasswordChangeHandler,
+    inputBlurHandler: confirmPasswordBlurHandler,
+    clearHandler: confirmPasswordClearHandler,
+  } = useInput(validatePasswordLength);
+
+  const clearForm = () => {
+    nameClearHandler();
+    emailClearHandler();
+    passwordClearHandler();
+    confirmPasswordClearHandler();
+  };
+
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('clicked')
+    if (password !== confirmPassword) return;
+
+    if (
+      nameHasError ||
+      emailHasError ||
+      passwordHasError ||
+      confirmPasswordHasError
+    )
+      return;
+
+    if (
+      name.length === 0 ||
+      email.length === 0 ||
+      password.length === 0 ||
+      confirmPassword.length === 0
+    )
+      return;
+
+    const newUser: NewUser = {
+      name,
+      email,
+      password,
+    };
+
+    console.log('NEW USER: ',newUser)
+    clearForm()
   }
   return (
     <Box
@@ -35,6 +103,11 @@ const RegistrationForm = () => {
             id="name"
             variant="outlined"
             size="small"
+            value={name}
+            onChange={nameChangeHandler}
+            onBlur={nameBlurHandler}
+            error={nameHasError}
+            helperText={nameHasError ? "Enter your name" : ""}
           />
 
           <InputLabel
@@ -44,11 +117,16 @@ const RegistrationForm = () => {
             Email
           </InputLabel>
           <TextField
-            type="text"
+            type="email"
             name="email"
             id="email"
             variant="outlined"
             size="small"
+            value={email}
+            onChange={emailChangeHandler}
+            onBlur={emailBlurHandler}
+            error={emailHasError}
+            helperText={emailHasError ? "Enter your email" : ""}
           />
 
           <InputLabel
@@ -58,7 +136,12 @@ const RegistrationForm = () => {
             Password
           </InputLabel>
           <TextField
-            type="text"
+            value={password}
+            onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
+            error={passwordHasError}
+            helperText={passwordHasError ? "Minimum 6 characters required" : ""}
+            type="password"
             name="password"
             id="password"
             variant="outlined"
@@ -73,7 +156,16 @@ const RegistrationForm = () => {
             Re-enter password
           </InputLabel>
           <TextField
-            type="text"
+            value={confirmPassword}
+            onChange={confirmPasswordChangeHandler}
+            onBlur={confirmPasswordBlurHandler}
+            error={confirmPassword.length > 0 && password !== confirmPassword}
+            helperText={
+              confirmPassword.length > 0 && password !== confirmPassword
+                ? "Passwords must match"
+                : ""
+            }
+            type="password"
             name="confirmPassword"
             id="confirmPassword"
             variant="outlined"
