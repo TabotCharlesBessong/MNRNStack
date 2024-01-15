@@ -1,13 +1,46 @@
-import { Box, Button, Divider, Grid, InputLabel, TextField, Typography } from "@mui/material"
-import { FC, FormEvent } from "react"
-import { Link } from "react-router-dom"
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  InputLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { FC, FormEvent } from "react";
+import { Link } from "react-router-dom";
+import useInput from "../../../hooks/input/use-input";
+import { validateEmail } from "../../../shared/utils/validation/email";
+import { validatePasswordLength } from "../../../shared/utils/validation/length";
 
+const SigninForm: FC = () => {
+  const {
+    text: email,
+    shouldDisplayError: emailHasError,
+    textChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    clearHandler: emailClearHandler,
+  } = useInput(validateEmail);
 
-const SigninForm:FC = () => {
-  const onSubmitHandler = (e:FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log("Clicked")
-  }
+  const {
+    text: password,
+    shouldDisplayError: passwordHasError,
+    textChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    clearHandler: passwordClearHandler,
+  } = useInput(validatePasswordLength);
+
+  const clearForm = () => {
+    emailClearHandler();
+    passwordClearHandler();
+  };
+  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (emailHasError || passwordHasError) return;
+    if (email.length === 0 || password.length === 0) return;
+    console.log("USER: ", email, password);
+    clearForm();
+  };
   return (
     <>
       <Box
@@ -32,8 +65,13 @@ const SigninForm:FC = () => {
               Email
             </InputLabel>
             <TextField
-              type="text"
               name="email"
+              type="email"
+              value={email}
+              onChange={emailChangeHandler}
+              onBlur={emailBlurHandler}
+              error={emailHasError}
+              helperText={emailHasError ? "Enter your email" : ""}
               id="email"
               variant="outlined"
               size="small"
@@ -46,10 +84,15 @@ const SigninForm:FC = () => {
               Password
             </InputLabel>
             <TextField
-              type="text"
               name="password"
+              value={password}
+              type="password"
+              onChange={passwordChangeHandler}
+              onBlur={passwordBlurHandler}
+              error={passwordHasError}
               id="password"
               variant="outlined"
+              helperText={passwordHasError ? "A password of minimum 6 characters is required" : ""}
               size="small"
               placeholder="Minimum 6 characters required"
             />
@@ -116,6 +159,6 @@ const SigninForm:FC = () => {
       </div>
     </>
   );
-}
+};
 
-export default SigninForm
+export default SigninForm;
