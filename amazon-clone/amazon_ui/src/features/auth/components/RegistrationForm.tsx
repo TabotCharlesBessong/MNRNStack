@@ -1,10 +1,24 @@
-import { Box, Button, Divider, Grid, InputLabel, TextField, Typography } from "@mui/material"
-import { FormEvent } from "react"
-import { Link } from "react-router-dom"
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Grid,
+  InputLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { FormEvent, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import useInput from "../../../hooks/input/use-input";
-import { validateNameLength, validatePasswordLength } from "../../../shared/utils/validation/length";
+import {
+  validateNameLength,
+  validatePasswordLength,
+} from "../../../shared/utils/validation/length";
 import { validateEmail } from "../../../shared/utils/validation/email";
 import { NewUser } from "../models/NewUser";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux/hooks";
+import { register, reset } from "../authSlice";
 
 const RegistrationForm = () => {
   const {
@@ -46,8 +60,19 @@ const RegistrationForm = () => {
     confirmPasswordClearHandler();
   };
 
+  const dispatch = useAppDispatch();
+  const { isLoading, isSuccess } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(reset());
+      clearForm();
+      navigate("/signin");
+    }
+  }, [isSuccess, dispatch]);
+
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (password !== confirmPassword) return;
 
     if (
@@ -72,9 +97,12 @@ const RegistrationForm = () => {
       password,
     };
 
-    console.log('NEW USER: ',newUser)
-    clearForm()
-  }
+    dispatch(register(newUser));
+    console.log("New User");
+  };
+
+  if (isLoading)
+    return <CircularProgress sx={{ marginTop: "64px" }} color="primary" />;
   return (
     <Box
       sx={{
@@ -231,6 +259,6 @@ const RegistrationForm = () => {
       </div>
     </Box>
   );
-}
+};
 
-export default RegistrationForm
+export default RegistrationForm;
