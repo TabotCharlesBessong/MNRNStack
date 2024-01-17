@@ -201,6 +201,7 @@ const RegistrationForm = () => {
           />
           <Button
             variant="contained"
+            id="register-btn"
             style={{
               marginTop: "16px",
               height: "31px",
