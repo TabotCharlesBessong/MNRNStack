@@ -129,6 +129,7 @@ const SigninForm: FC = () => {
 
             <Button
               variant="contained"
+              id="signin-btn"
               style={{
                 marginTop: "16px",
                 height: "31px",
@@ -173,6 +174,7 @@ const SigninForm: FC = () => {
 
         <Link
           to="/register"
+          id="register-link"
           style={{ textDecoration: "none", color: "#0000ee" }}
         >
           <Button
