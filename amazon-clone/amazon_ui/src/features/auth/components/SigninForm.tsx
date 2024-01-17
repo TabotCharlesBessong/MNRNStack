@@ -138,6 +138,9 @@ const SigninForm: FC = () => {
                 textTransform: "none",
               }}
               type="submit"
+              disabled={
+                !validatePasswordLength(password) || !validateEmail(email)
+              }
             >
               Sign-In
             </Button>

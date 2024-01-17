@@ -1,6 +1,7 @@
 import { REACT_APP_BASE_API } from "../../../constant/endpoints";
 import { DecodedJwt } from "../models/DecodedJwt.interface";
 import { DisplayUser } from "../models/DisplayUser.interface";
+import { Jwt } from "../models/Jwt";
 import { LoginUser } from "../models/LoginUser.interface";
 import { NewUser } from "../models/NewUser";
 import axios from "axios";
@@ -14,7 +15,7 @@ const register = async (newUser: NewUser): Promise<DisplayUser | null> => {
   return response.data;
 };
 
-const login = async (user: LoginUser): Promise<any> => {
+const login = async (user: LoginUser): Promise<{jwt:Jwt,user:DisplayUser | null}> => {
   const response = await axios.post(`${REACT_APP_BASE_API}/auth/login`, user);
   console.log(response)
   console.log("Hello")
@@ -24,8 +25,9 @@ const login = async (user: LoginUser): Promise<any> => {
 
     const decodedJwt: DecodedJwt = jwtDecode(response.data.token);
     localStorage.setItem("user", JSON.stringify(decodedJwt.user));
+    return {jwt:response.data,user:decodedJwt.user}
   }
-  return response.data;
+  return {jwt:response.data,user:null}
 };
 
 const logout = (): void => {
