@@ -8,7 +8,7 @@ import { jwtDecode } from "jwt-decode";
 
 const register = async (newUser: NewUser): Promise<DisplayUser | null> => {
   const response = await axios.post(
-    `${REACT_APP_BASE_API}/auth/verify-jwt`,
+    `${REACT_APP_BASE_API}/auth/register`,
     newUser
   );
   return response.data;
