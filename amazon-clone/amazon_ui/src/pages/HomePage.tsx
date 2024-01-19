@@ -2,40 +2,40 @@ import { useEffect } from "react";
 import { logout, selectedUser } from "../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/redux/hooks";
 import { Link } from "react-router-dom";
+import { getProducts } from "../features/products/productSlice";
+import { Product } from "../features/auth/components";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
 
-  const { user, jwt } = useAppSelector(selectedUser);
+  const { cart, products } = useAppSelector((state) => state.product);
 
   useEffect(() => {
-    console.log(123, user, jwt);
-  }, [user]);
+    dispatch(getProducts());
+  }, []);
+  console.log({ products, cart });
   const logoutHandler = () => {
     dispatch(logout());
   };
   return (
     <div>
       <h1>Home Page</h1>
-      <a
+      <div
         onClick={logoutHandler}
         style={{
-          backgroundColor: "yellow",
-          cursor: "pointer",
-          height: "40px",
-          width: "60px",
-          padding: "8px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "48px",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "48px",
         }}
       >
-        Logout
-      </a>
-      {user ? (
-        user?.email
-      ) : (
-        <h2>
-          <Link to="/register">Signup</Link>
-        </h2>
-      )}
+        {products.length > 0 &&
+          products.map((product) => {
+            <Product key={product._id} product={product} />;
+          })}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/hooks";
 import { logout, selectedUser } from "../authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppBar, Badge, Box, Button, Toolbar } from "@mui/material";
 import images from "../../../constant/images";
 import {ShoppingCartOutlined} from "@mui/icons-material"
@@ -29,6 +29,7 @@ const Header = () => {
         sx={{ backgroundColor: "#131921", color: "white", padding: "4px" }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Link to="/" >
           <img
             src={images.amazon1}
             alt="amazon"
@@ -39,6 +40,8 @@ const Header = () => {
               cursor: "pointer",
             }}
           />
+
+          </Link>
           <div style={{ display: "flex" }}>
             <div>
               <div>Hello, {user?.name}</div>

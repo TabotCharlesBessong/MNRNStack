@@ -17,7 +17,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<PrivateRoute page={<HomePage />} />} />
-          <Route path="/" element={<PrivateRoute page={<CartPage />} />} />
+          <Route path="/cart" element={<PrivateRoute page={<CartPage />} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/Signin" element={<SigninPage />} />
           <Route path="*" element={<Navigate to="/" />} />
