@@ -17,11 +17,13 @@ const common_1 = require("@nestjs/common");
 const CreateUser_dto_1 = require("./dtos/CreateUser.dto");
 const constants_1 = require("../utils/constants");
 let AuthController = class AuthController {
-    constructor(authService) {
+    constructor(authService, userService) {
         this.authService = authService;
+        this.userService = userService;
     }
     registerUser(createUserDto) {
         console.log(createUserDto);
+        this.userService.createUser(createUserDto);
     }
     login() { }
     status() { }
@@ -56,6 +58,7 @@ __decorate([
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)(constants_1.Routes.AUTH),
     __param(0, (0, common_1.Inject)(constants_1.Services.AUTH)),
-    __metadata("design:paramtypes", [Object])
+    __param(1, (0, common_1.Inject)(constants_1.Services.USERS)),
+    __metadata("design:paramtypes", [Object, Object])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map
