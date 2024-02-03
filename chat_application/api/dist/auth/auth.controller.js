@@ -14,16 +14,51 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const types_1 = require("../utils/types");
+const CreateUser_dto_1 = require("./dtos/CreateUser.dto");
+const constants_1 = require("../utils/constants");
 let AuthController = class AuthController {
-    constructor(authService) {
+    constructor(authService, userService) {
         this.authService = authService;
+        this.userService = userService;
     }
+    registerUser(createUserDto) {
+        console.log(createUserDto);
+        this.userService.createUser(createUserDto);
+    }
+    login() { }
+    status() { }
+    logout() { }
 };
 exports.AuthController = AuthController;
+__decorate([
+    (0, common_1.Post)('register'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [CreateUser_dto_1.CreateUserDto]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "registerUser", null);
+__decorate([
+    (0, common_1.Post)('login'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Get)('status'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "status", null);
+__decorate([
+    (0, common_1.Post)('logout'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "logout", null);
 exports.AuthController = AuthController = __decorate([
-    (0, common_1.Controller)(types_1.Routes.AUTH),
-    __param(0, (0, common_1.Inject)(types_1.Services.AUTH)),
-    __metadata("design:paramtypes", [Object])
+    (0, common_1.Controller)(constants_1.Routes.AUTH),
+    __param(0, (0, common_1.Inject)(constants_1.Services.AUTH)),
+    __param(1, (0, common_1.Inject)(constants_1.Services.USERS)),
+    __metadata("design:paramtypes", [Object, Object])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map
