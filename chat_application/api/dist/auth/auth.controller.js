@@ -14,8 +14,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const types_1 = require("../utils/types");
 const CreateUser_dto_1 = require("./dtos/CreateUser.dto");
+const constants_1 = require("../utils/constants");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -54,8 +54,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "logout", null);
 exports.AuthController = AuthController = __decorate([
-    (0, common_1.Controller)(types_1.Routes.AUTH),
-    __param(0, (0, common_1.Inject)(types_1.Services.AUTH)),
+    (0, common_1.Controller)(constants_1.Routes.AUTH),
+    __param(0, (0, common_1.Inject)(constants_1.Services.AUTH)),
     __metadata("design:paramtypes", [Object])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map

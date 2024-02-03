@@ -1,6 +1,6 @@
-export declare enum Routes {
-    AUTH = "auth"
-}
-export declare enum Services {
-    AUTH = "AUTH_SERVICE"
-}
+export type CreateUserDetails = {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+};
