@@ -6,7 +6,7 @@ export class Avatars {
   @Field()
   id: string;
 
-  @Field()
+  @Field() 
   public_id: string;
 
   @Field()

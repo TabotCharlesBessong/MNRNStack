@@ -28,6 +28,6 @@ export class UsersService {
 
   // get all users service 
   async getUsers(){
-    return this.prisma.user.findMany()
+    return this.prisma.user.findMany({})
   }
 }
