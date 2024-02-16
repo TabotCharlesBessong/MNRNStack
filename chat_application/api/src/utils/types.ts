@@ -4,3 +4,8 @@ export type CreateUserDetails = {
   firstName:string
   lastName:string
 }
+
+export type ValidateUserDetails = {
+  username: string;
+  password: string;
+};
