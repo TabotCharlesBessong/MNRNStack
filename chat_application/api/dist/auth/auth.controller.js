@@ -16,14 +16,14 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const CreateUser_dto_1 = require("./dtos/CreateUser.dto");
 const constants_1 = require("../utils/constants");
+const class_transformer_1 = require("class-transformer");
 let AuthController = class AuthController {
     constructor(authService, userService) {
         this.authService = authService;
         this.userService = userService;
     }
-    registerUser(createUserDto) {
-        console.log(createUserDto);
-        this.userService.createUser(createUserDto);
+    async registerUser(createUserDto) {
+        return (0, class_transformer_1.instanceToPlain)(await this.userService.createUser(createUserDto));
     }
     login() { }
     status() { }
@@ -35,7 +35,7 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [CreateUser_dto_1.CreateUserDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], AuthController.prototype, "registerUser", null);
 __decorate([
     (0, common_1.Post)('login'),
