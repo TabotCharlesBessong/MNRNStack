@@ -39,6 +39,7 @@
     "form-data": "^4.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.4",
+    "mysql2": "^3.9.1",
     "nestjs-stripe": "^1.0.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
