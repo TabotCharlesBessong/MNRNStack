@@ -21,7 +21,7 @@ export class AuthController {
 
   @Post('verify-jwt')
   @HttpCode(HttpStatus.OK)
-  verifyJwt(@Body() payload:{jwt:string}){
-    return this.authService.verifyJwt(payload.jwt)
+  verifyJwt(@Body() payload: { jwt: string }) {
+    return this.authService.verifyJwt(payload.jwt);
   }
 }

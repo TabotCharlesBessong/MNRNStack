@@ -24,12 +24,12 @@ exports.AuthModule = AuthModule = __decorate([
             jwt_1.JwtModule.registerAsync({
                 useFactory: () => ({
                     secret: 'secret',
-                    signOptions: { expiresIn: '3600s' }
-                })
-            })
+                    signOptions: { expiresIn: '3600s' },
+                }),
+            }),
         ],
         controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService, jwt_gaurd_1.JwtGuard, jwt_strategy_1.JwtStrategy]
+        providers: [auth_service_1.AuthService, jwt_gaurd_1.JwtGuard, jwt_strategy_1.JwtStrategy],
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map

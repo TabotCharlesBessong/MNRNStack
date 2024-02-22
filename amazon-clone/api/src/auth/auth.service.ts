@@ -20,7 +20,11 @@ export class AuthService {
   async register(user: Readonly<NewUserDTO>): Promise<UserDetails | any> {
     const { name, email, password } = user;
     const existingUser = await this.userService.findByEmail(email);
-    if (existingUser) throw new HttpException('An account with that email address already exists!',HttpStatus.CONFLICT)
+    if (existingUser)
+      throw new HttpException(
+        'An account with that email address already exists!',
+        HttpStatus.CONFLICT,
+      );
     const hashedPassword = await this.hashPassword(password);
     const newUser = await this.userService.create(name, email, hashedPassword);
     return this.userService._getUserDetails(newUser);
@@ -54,17 +58,18 @@ export class AuthService {
   ): Promise<{ token: string } | null> {
     const { email, password } = existingUser;
     const user = await this.validateUser(email, password);
-    if (!user) throw new HttpException('Invalid Credentials!',HttpStatus.UNAUTHORIZED)
+    if (!user)
+      throw new HttpException('Invalid Credentials!', HttpStatus.UNAUTHORIZED);
     const jwt = await this.jwtService.signAsync({ user });
     return { token: jwt };
   }
 
-  async verifyJwt(jwt:string):Promise<{exp:number}> {
+  async verifyJwt(jwt: string): Promise<{ exp: number }> {
     try {
-      const {exp} = await this.jwtService.verifyAsync(jwt)
-      return {exp}
+      const { exp } = await this.jwtService.verifyAsync(jwt);
+      return { exp };
     } catch (error) {
-      throw new HttpException('Invalid JWT',HttpStatus.UNAUTHORIZED)
+      throw new HttpException('Invalid JWT', HttpStatus.UNAUTHORIZED);
     }
   }
 }
