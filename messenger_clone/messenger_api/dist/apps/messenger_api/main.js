@@ -1,14 +1,61 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ([
-/* 0 */,
-/* 1 */
-/***/ ((module) => {
+/******/ 	var __webpack_modules__ = ({
 
-module.exports = require("@nestjs/core");
+/***/ "./apps/messenger_api/src/app.controller.ts":
+/*!**************************************************!*\
+  !*** ./apps/messenger_api/src/app.controller.ts ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AppController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const microservices_1 = __webpack_require__(/*! @nestjs/microservices */ "@nestjs/microservices");
+let AppController = class AppController {
+    constructor(authService) {
+        this.authService = authService;
+    }
+    async getUser() {
+        return this.authService.send({
+            cmd: 'get-user'
+        }, {});
+    }
+};
+exports.AppController = AppController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getUser", null);
+exports.AppController = AppController = __decorate([
+    (0, common_1.Controller)(),
+    __param(0, (0, common_1.Inject)('AUTH_SERVICE')),
+    __metadata("design:paramtypes", [typeof (_a = typeof microservices_1.ClientProxy !== "undefined" && microservices_1.ClientProxy) === "function" ? _a : Object])
+], AppController);
+
 
 /***/ }),
-/* 2 */
+
+/***/ "./apps/messenger_api/src/app.module.ts":
+/*!**********************************************!*\
+  !*** ./apps/messenger_api/src/app.module.ts ***!
+  \**********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -20,11 +67,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
-const common_1 = __webpack_require__(3);
-const app_controller_1 = __webpack_require__(4);
-const app_service_1 = __webpack_require__(6);
-const microservices_1 = __webpack_require__(5);
-const config_1 = __webpack_require__(7);
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const app_controller_1 = __webpack_require__(/*! ./app.controller */ "./apps/messenger_api/src/app.controller.ts");
+const app_service_1 = __webpack_require__(/*! ./app.service */ "./apps/messenger_api/src/app.service.ts");
+const microservices_1 = __webpack_require__(/*! @nestjs/microservices */ "@nestjs/microservices");
+const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -47,7 +94,7 @@ exports.AppModule = AppModule = __decorate([
                             durable: true
                         }
                     }
-                }
+                },
             ])
         ],
         controllers: [app_controller_1.AppController],
@@ -76,65 +123,11 @@ exports.AppModule = AppModule = __decorate([
 
 
 /***/ }),
-/* 3 */
-/***/ ((module) => {
 
-module.exports = require("@nestjs/common");
-
-/***/ }),
-/* 4 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AppController = void 0;
-const common_1 = __webpack_require__(3);
-const microservices_1 = __webpack_require__(5);
-let AppController = class AppController {
-    constructor(authService) {
-        this.authService = authService;
-    }
-    async getUser() {
-        return this.authService.send({
-            cmd: 'get-user'
-        }, {});
-    }
-};
-exports.AppController = AppController;
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], AppController.prototype, "getUser", null);
-exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)(),
-    __param(0, (0, common_1.Inject)('AUTH_SERVICE')),
-    __metadata("design:paramtypes", [typeof (_a = typeof microservices_1.ClientProxy !== "undefined" && microservices_1.ClientProxy) === "function" ? _a : Object])
-], AppController);
-
-
-/***/ }),
-/* 5 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/microservices");
-
-/***/ }),
-/* 6 */
+/***/ "./apps/messenger_api/src/app.service.ts":
+/*!***********************************************!*\
+  !*** ./apps/messenger_api/src/app.service.ts ***!
+  \***********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -146,7 +139,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppService = void 0;
-const common_1 = __webpack_require__(3);
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 let AppService = class AppService {
     getHello() {
         return 'Hello World!';
@@ -159,13 +152,48 @@ exports.AppService = AppService = __decorate([
 
 
 /***/ }),
-/* 7 */
+
+/***/ "@nestjs/common":
+/*!*********************************!*\
+  !*** external "@nestjs/common" ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = require("@nestjs/common");
+
+/***/ }),
+
+/***/ "@nestjs/config":
+/*!*********************************!*\
+  !*** external "@nestjs/config" ***!
+  \*********************************/
 /***/ ((module) => {
 
 module.exports = require("@nestjs/config");
 
+/***/ }),
+
+/***/ "@nestjs/core":
+/*!*******************************!*\
+  !*** external "@nestjs/core" ***!
+  \*******************************/
+/***/ ((module) => {
+
+module.exports = require("@nestjs/core");
+
+/***/ }),
+
+/***/ "@nestjs/microservices":
+/*!****************************************!*\
+  !*** external "@nestjs/microservices" ***!
+  \****************************************/
+/***/ ((module) => {
+
+module.exports = require("@nestjs/microservices");
+
 /***/ })
-/******/ 	]);
+
+/******/ 	});
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -196,12 +224,16 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it uses a non-standard name for the exports (exports).
 (() => {
 var exports = __webpack_exports__;
+/*!****************************************!*\
+  !*** ./apps/messenger_api/src/main.ts ***!
+  \****************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __webpack_require__(1);
-const app_module_1 = __webpack_require__(2);
+const core_1 = __webpack_require__(/*! @nestjs/core */ "@nestjs/core");
+const app_module_1 = __webpack_require__(/*! ./app.module */ "./apps/messenger_api/src/app.module.ts");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    await app.listen(5000);
     app.startAllMicroservices();
 }
 bootstrap();
