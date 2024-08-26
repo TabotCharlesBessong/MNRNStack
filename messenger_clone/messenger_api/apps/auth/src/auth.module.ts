@@ -3,6 +3,8 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { dataSourceOptions } from './db/data-source';
+import { UserEntity } from '@app/shared/entities/user.entity';
 
 @Module({
   imports: [
@@ -12,18 +14,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: 'localhost',
-        port: 5432,
-        username: 'postgres',
-        database: 'messenger-clone',
-        entities: [],
-        synchronize: true, // not good for production mode
+      useFactory: () => ({
+        ...dataSourceOptions,
         autoLoadEntities: true,
+        synchronize: true, // not good for production mode
       }),
-      inject:[ConfigService]
+      inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([UserEntity])
   ],
   controllers: [AuthController],
   providers: [AuthService],

@@ -4,7 +4,7 @@
   "sourceRoot": "apps/messenger_api/src",
   "compilerOptions": {
     "deleteOutDir": true,
-    "webpack": true,
+    "webpack": false,
     "tsConfigPath": "apps/messenger_api/tsconfig.app.json"
   },
   "monorepo": true,

@@ -6,7 +6,6 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -17,7 +16,14 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/messenger_api/test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/messenger_api/test/jest-e2e.json",
+    "build:messenger_api": "nest build messenger_api",
+    "build:auth": "nest build auth",
+    "build": "yarn run build:messenger_api && yarn run build:auth",
+    "typeorm": "npx typeorm -d ./dist/apps/auth/src/db/data-source.js",
+    "generate:migration": "yarn run typeorm -- migration:generate",
+    "run:migration": "yarn run typeorm -- migration:run",
+    "revert:migration": "yarn run typeorm -- migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

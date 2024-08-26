@@ -1,0 +1,55 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthController = void 0;
+const common_1 = require("@nestjs/common");
+const auth_service_1 = require("./auth.service");
+const microservices_1 = require("@nestjs/microservices");
+let AuthController = class AuthController {
+    constructor(authService) {
+        this.authService = authService;
+    }
+    async getUsers(context) {
+        const channel = context.getChannelRef();
+        const message = context.getMessage();
+        channel.ack(message);
+        return this.authService.getUsers();
+    }
+    async postUser(context) {
+        const channel = context.getChannelRef();
+        const message = context.getMessage();
+        channel.ack(message);
+        return this.authService.postUser();
+    }
+};
+exports.AuthController = AuthController;
+__decorate([
+    (0, microservices_1.MessagePattern)({ cmd: 'get-users' }),
+    __param(0, (0, microservices_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [microservices_1.RmqContext]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getUsers", null);
+__decorate([
+    (0, microservices_1.MessagePattern)({ cmd: 'post-user' }),
+    __param(0, (0, microservices_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [microservices_1.RmqContext]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "postUser", null);
+exports.AuthController = AuthController = __decorate([
+    (0, common_1.Controller)(),
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
+], AuthController);
+//# sourceMappingURL=auth.controller.js.map
