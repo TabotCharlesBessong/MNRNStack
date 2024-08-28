@@ -9,29 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostgresConfigService = void 0;
+exports.PresenceController = void 0;
 const common_1 = require("@nestjs/common");
-const config_1 = require("@nestjs/config");
-let PostgresConfigService = class PostgresConfigService {
-    constructor(configService) {
-        this.configService = configService;
+const presence_service_1 = require("./presence.service");
+let PresenceController = class PresenceController {
+    constructor(presenceService) {
+        this.presenceService = presenceService;
     }
-    createTypeOrmOptions() {
-        return {
-            type: "postgres",
-            host: "localhost",
-            port: 5432,
-            username: "postgres",
-            database: "messenger-clone",
-            entities: [],
-            synchronize: true,
-            autoLoadEntities: true
-        };
+    getHello() {
+        return this.presenceService.getHello();
     }
 };
-exports.PostgresConfigService = PostgresConfigService;
-exports.PostgresConfigService = PostgresConfigService = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [config_1.ConfigService])
-], PostgresConfigService);
-//# sourceMappingURL=config.service.js.map
+exports.PresenceController = PresenceController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", String)
+], PresenceController.prototype, "getHello", null);
+exports.PresenceController = PresenceController = __decorate([
+    (0, common_1.Controller)(),
+    __metadata("design:paramtypes", [presence_service_1.PresenceService])
+], PresenceController);
+//# sourceMappingURL=presence.controller.js.map

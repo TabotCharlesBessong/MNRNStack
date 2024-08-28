@@ -1,11 +1,8 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ClientProxyFactory, ClientsModule, Transport } from '@nestjs/microservices';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ClientProxyFactory, ClientsModule, Transport } from '@nestjs/microservices';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { PostgresConfigModule } from 'libs/config/config.module';
-import { PostgresConfigService } from 'libs/config/config.service';
 
 @Module({
   imports: [
@@ -26,11 +23,6 @@ import { PostgresConfigService } from 'libs/config/config.service';
         }
       }
     },
-    // TypeOrmModule.forRootAsync({
-    //   imports:[PostgresConfigModule],
-    //   useClass:PostgresConfigService,
-    //   inject:[PostgresConfigService]
-    // })
   ])],
   controllers: [AppController],
   providers: [AppService,{

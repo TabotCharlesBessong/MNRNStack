@@ -6,15 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostgresConfigModule = void 0;
+exports.PresenceModule = void 0;
 const common_1 = require("@nestjs/common");
-const config_service_1 = require("./config.service");
-let PostgresConfigModule = class PostgresConfigModule {
+const presence_controller_1 = require("./presence.controller");
+const presence_service_1 = require("./presence.service");
+let PresenceModule = class PresenceModule {
 };
-exports.PostgresConfigModule = PostgresConfigModule;
-exports.PostgresConfigModule = PostgresConfigModule = __decorate([
+exports.PresenceModule = PresenceModule;
+exports.PresenceModule = PresenceModule = __decorate([
     (0, common_1.Module)({
-        providers: [config_service_1.PostgresConfigService]
+        imports: [],
+        controllers: [presence_controller_1.PresenceController],
+        providers: [presence_service_1.PresenceService],
     })
-], PostgresConfigModule);
-//# sourceMappingURL=config.module.js.map
+], PresenceModule);
+//# sourceMappingURL=presence.module.js.map

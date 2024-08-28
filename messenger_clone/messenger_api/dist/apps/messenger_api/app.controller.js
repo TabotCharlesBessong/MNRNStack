@@ -16,17 +16,23 @@ exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const microservices_1 = require("@nestjs/microservices");
 let AppController = class AppController {
-    constructor(authService) {
+    constructor(authService, presenceService) {
         this.authService = authService;
+        this.presenceService = presenceService;
     }
     async getUsers() {
         return this.authService.send({
-            cmd: 'get-users'
+            cmd: 'get-users',
         }, {});
     }
     async postUser() {
         return this.authService.send({
-            cmd: 'post-user'
+            cmd: 'post-user',
+        }, {});
+    }
+    async getPresence() {
+        return this.presenceService.send({
+            cmd: 'get-presence',
         }, {});
     }
 };
@@ -43,9 +49,17 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "postUser", null);
+__decorate([
+    (0, common_1.Get)('presence'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getPresence", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __param(0, (0, common_1.Inject)('AUTH_SERVICE')),
-    __metadata("design:paramtypes", [microservices_1.ClientProxy])
+    __param(1, (0, common_1.Inject)('PRESENCE_SERVICE')),
+    __metadata("design:paramtypes", [microservices_1.ClientProxy,
+        microservices_1.ClientProxy])
 ], AppController);
 //# sourceMappingURL=app.controller.js.map
