@@ -30,19 +30,30 @@ let AppController = class AppController {
     constructor(authService) {
         this.authService = authService;
     }
-    async getUser() {
+    async getUsers() {
         return this.authService.send({
-            cmd: 'get-user'
+            cmd: 'get-users',
+        }, {});
+    }
+    async postUser() {
+        return this.authService.send({
+            cmd: 'post-user',
         }, {});
     }
 };
 exports.AppController = AppController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('auth'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], AppController.prototype, "getUser", null);
+], AppController.prototype, "getUsers", null);
+__decorate([
+    (0, common_1.Post)('auth'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "postUser", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __param(0, (0, common_1.Inject)('AUTH_SERVICE')),

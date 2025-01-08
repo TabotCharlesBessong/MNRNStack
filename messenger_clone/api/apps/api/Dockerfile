@@ -4,6 +4,6 @@ WORKDIR /usr/src/app
 
 COPY package*.json .
 
-RUN pnpm install
+RUN npm install
 
 COPY . .
