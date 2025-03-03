@@ -1,8 +1,8 @@
-version: '3'
+# version: '3'
 services:
   rabbitmq:
     image: rabbitmq:4-management
-    container_name: :rabbitmq
+    container_name: rabbitmq
     hostname: rabbitmq
     volumes:
       - /var/lib/rabbitmq
@@ -21,7 +21,7 @@ services:
       - .env
     depends_on:
       - rabbitmq
-      # - postgres
+      - postgres
     volumes:
       - .:/usr/src/app # any change to base folder should be reflected
       - /usr/src/app/node_modules
@@ -49,10 +49,10 @@ services:
     image: postgres
     env_file:
       - .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
 
 
   postgres_admin:
